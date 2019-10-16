@@ -1,0 +1,62 @@
+
+h1 {
+  margin-left: 2rem;
+}
+
+.header{
+  background-color: #323596;
+  color: white;
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+}
+
+.input{
+  margin-top: -0.5rem;
+  text-align: center;
+  height: 20rem;
+  background-color: 9221A7;
+}
+
+
+input[type = text]{
+
+  margin-top: 10rem;
+  border: none;
+  background-color: aquamarine;
+  border-radius: 0.2rem;
+  width: 25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
+  height: 3rem;
+}
+
+select {
+  margin-left: -5rem;
+}
+
+.enter{
+  background-color: lightblue;
+  height: 2.6rem;
+  margin-left: 1rem;
+  border:2px solid blue;
+  border-radius: 0.2rem;
+}
+
+.data{
+  background-color: #74EBFC;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto ;
+
+}
+
+.grid-item{
+  background-color: #F9F9F9 ;
+  margin-top: 2rem;
+  margin-right: 2rem;
+  width: 15rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
+  border-radius: 0.5rem;
+
+}
