@@ -21,8 +21,10 @@ class App extends Component {
     ranked_stats: [],
     server: "br1",
     profileIconId: 0,
-    key : 'RGAPI-b3ec3043-bb11-463c-9488-000eafa91696'
-  }}
+    key : 'RGAPI-c88f45c0-637e-422d-bf03-8d8969cc912e',
+    status: "",
+    server_status: false
+      }}
 
 
 
@@ -46,9 +48,9 @@ class App extends Component {
 
   async getId(){
 
-
+    
     let URL =`https://${this.state.server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summoner}?api_key=${this.state.key}`
-  
+    console.log(URL)
     let response = await fetch(URL)
     let result = await response.json();
   
@@ -67,7 +69,7 @@ class App extends Component {
     })
     //https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/1HcKHDjWIyH9DL_WIRs0jpoeszZk2XGkdSP3YNnLY728-A?api_key=RGAPI-79c9aba9-baf0-4611-a9ca-ea4b57b532ed
     URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
-
+    console.log(URL)
     fetch(URL)
     .then(res => res.json())
     .then((data) => {
@@ -82,7 +84,8 @@ class App extends Component {
   getRankedStats = async () =>{
     await this.getMasteries()
     URL = `https://${this.state.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.id}/?api_key=${this.state.key}`
-    fetch(URL)
+    console.log(URL)
+    fetch(URL)  
     .then(res => res.json())
     .then(data =>{
       this.setState({
@@ -92,7 +95,29 @@ class App extends Component {
     })
   } 
 
+  componentDidMount = () =>{
+    
+    URL = `https://${this.state.server}.api.riotgames.com/lol/status/v3/shard-data/?api_key=${this.state.key}`
+    console.log(URL)
+    fetch(URL)  
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data)
+      this.setState({
+        status : data.services[0].status
+      })
+    })
+    console.log("Srmtatus", this.state.status)
+    if (this.state.status == "online"){
+      this.setState({server_status: true})
+    }
+  }
+
+
+
   render () {
+  
+  
 
       return (
         <div>
@@ -100,6 +125,7 @@ class App extends Component {
             <div className="header">
           <h1>LoL Stats</h1>
           </div>
+          Server:{this.state.status ? <img src="online.png" style={{width: 15, height: 15}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
           <div className="input">
         
           <form onSubmit={this.handleSubmit}>
