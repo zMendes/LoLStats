@@ -5,9 +5,7 @@ import Dados from './components/dados'
 import RankedStats from './components/rankedStats'
 import champion from './champion.js'
 import Rotation from './components/rotation'
-
-
-
+import Matches from './components/matches'
 import './App.css'
 
 
@@ -19,14 +17,19 @@ class App extends Component {
     submitted: false,
     dados:[],
     id: "",
+    accountId: "",
     ranked_stats: [],
     server: "br1",
     profileIconId: 0,
     key : 'RGAPI-c88f45c0-637e-422d-bf03-8d8969cc912e',
     status: "",
     server_status: false,
-    rotation : []
-      }}
+    rotation : [],
+    matches: [],
+    gameMode: "",
+    isPlaying: false
+      }
+    }
 
 
 
@@ -56,19 +59,56 @@ class App extends Component {
     let response = await fetch(URL)
     let result = await response.json();
   
-    return [result.id, result.profileIconId]
+    return [result.id, result.profileIconId, result.accountId]
 
   }
 
+  isPlaying = async () =>{
+    URL = `https://${this.state.server}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${this.state.id}?api_key=${this.state.key}`
+    await fetch(URL)
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data, "DATA DENTRO DO ISPLAYYUNG")
+      this.setState({
+        gameMode: data.gameType
+      })
+
+    })
+
+    console.log("game modeeeeee", this.state.gameMode)
+    if (this.state.gameMode === "MATCHED_GAME"){
+      this.setState({isPlaying : true})
+    }
+    else{this.setState({isPlaying: false})}
+  }
+
+  getMatchesPlayed = async ()=>{
+    URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}/?api_key=${this.state.key}`
+    console.log(URL, "get ammdmtshcees played")
+
+    await fetch(URL)
+    .then(res =>res.json())
+    .then(data =>{
+      this.setState({
+        matches: data.matches.slice(0,9)
+      })
+    })
+
+  }
   
   getMasteries = async  ()=> {
     let  a = await this.getId()
+    console.log("AAAAAAAAAAAAAA", a)
     console.log("print no MASTERIES ESSE 'O RETURN DO GET ID", a)
     this.setState({
       id: a[0],
-      profileIconId: a[1]
+      profileIconId: a[1],
+      accountId: a[2]
       
     })
+
+    await this.getMatchesPlayed()
+    await this.isPlaying()
     //https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/1HcKHDjWIyH9DL_WIRs0jpoeszZk2XGkdSP3YNnLY728-A?api_key=RGAPI-79c9aba9-baf0-4611-a9ca-ea4b57b532ed
     URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
     console.log(URL)
@@ -76,12 +116,12 @@ class App extends Component {
     .then(res => res.json())
     .then((data) => {
       this.setState({ 
-        dados: data,
+        dados: data.slice(0,18),
       })
-
   })
     .catch(console.log)
   }
+
 
   getRankedStats = async () =>{
     await this.getMasteries()
@@ -171,7 +211,8 @@ class App extends Component {
           <div className="data">
             <div className="grid">
           {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
-          
+          {this.state.isPlaying ? <p>Em jogo</p> : null}
+          {this.state.submitted  ? <Matches matches={this.state.matches} champions={champion}/> : null}
           <Dados dados={this.state.dados} champions={champion} />  
           </div>
           </div>
