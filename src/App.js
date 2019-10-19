@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import Dados from './components/dados'
 import RankedStats from './components/rankedStats'
 import champion from './champion.js'
+import Rotation from './components/rotation'
 
 
 
@@ -23,7 +24,8 @@ class App extends Component {
     profileIconId: 0,
     key : 'RGAPI-c88f45c0-637e-422d-bf03-8d8969cc912e',
     status: "",
-    server_status: false
+    server_status: false,
+    rotation : []
       }}
 
 
@@ -107,7 +109,15 @@ class App extends Component {
         status : data.services[0].status
       })
     })
-    console.log("Srmtatus", this.state.status)
+    URL = `https://${this.state.server}.api.riotgames.com/lol/platform/v3/champion-rotations/?api_key=${this.state.key}`
+    fetch(URL)
+    .then(res => res.json())
+    .then(data =>{
+      this.setState({rotation: data.freeChampionIds})
+    })
+
+
+    
     if (this.state.status == "online"){
       this.setState({server_status: true})
     }
@@ -125,9 +135,12 @@ class App extends Component {
             <div className="header">
           <h1>LoL Stats</h1>
           </div>
-          Server:{this.state.status ? <img src="online.png" style={{width: 15, height: 15}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
+          Server:{this.state.status ? <img src="online.png" style={{width: 12, height: 15}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
+
+          <Rotation rotation={this.state.rotation} champions={champion}/>
+
+
           <div className="input">
-        
           <form onSubmit={this.handleSubmit}>
             <p><input type="text" name="summoner"  value={this.state.summoner} onChange={this.handleChange}/>
             <select name="server" onChange={this.handleChange  }>

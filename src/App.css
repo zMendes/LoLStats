@@ -10,6 +10,7 @@ h1 {
 }
 
 .input{
+  clear: both;
   margin-top: -0.5rem;
   text-align: center;
   height: 20rem;
@@ -18,7 +19,6 @@ h1 {
 
 
 input[type = text]{
-
   margin-top: 10rem;
   border: none;
   background-color: aquamarine;
