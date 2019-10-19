@@ -209,9 +209,12 @@ class App extends Component {
           </form>
           </div>
           <div className="data">
-            <div className="grid">
-          {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
+          
           {this.state.isPlaying ? <p>Em jogo</p> : null}
+          <div className="grid">
+
+          
+          {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
           {this.state.submitted  ? <Matches matches={this.state.matches} champions={champion}/> : null}
           <Dados dados={this.state.dados} champions={champion} />  
           </div>
