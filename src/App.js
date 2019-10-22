@@ -21,13 +21,15 @@ class App extends Component {
     ranked_stats: [],
     server: "br1",
     profileIconId: 0,
-    key : 'RGAPI-c88f45c0-637e-422d-bf03-8d8969cc912e',
+    key : 'RGAPI-0226107a-306f-4f72-8b90-df1306f3200d',
     status: "",
     server_status: false,
     rotation : [],
     matches: [],
     gameMode: "",
-    isPlaying: false
+    isPlaying: false,
+    matchesInfo: [],
+    match: []
       }
     }
 
@@ -44,7 +46,7 @@ class App extends Component {
   handleSubmit = (event)=>{
     event.preventDefault(); 
     
-  
+    this.setState({submitted: false})
   
     
     this.getRankedStats()
@@ -55,7 +57,6 @@ class App extends Component {
 
     
     let URL =`https://${this.state.server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${this.state.summoner}?api_key=${this.state.key}`
-    console.log(URL)
     let response = await fetch(URL)
     let result = await response.json();
   
@@ -64,18 +65,16 @@ class App extends Component {
   }
 
   isPlaying = async () =>{
-    URL = `https://${this.state.server}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${this.state.id}?api_key=${this.state.key}`
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${this.state.id}?api_key=${this.state.key}`
     await fetch(URL)
     .then(res => res.json())
     .then(data =>{
-      console.log(data, "DATA DENTRO DO ISPLAYYUNG")
       this.setState({
         gameMode: data.gameType
       })
 
     })
 
-    console.log("game modeeeeee", this.state.gameMode)
     if (this.state.gameMode === "MATCHED_GAME"){
       this.setState({isPlaying : true})
     }
@@ -83,35 +82,57 @@ class App extends Component {
   }
 
   getMatchesPlayed = async ()=>{
-    URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}/?api_key=${this.state.key}`
-    console.log(URL, "get ammdmtshcees played")
-
+    console.log("pegando matches de:", this.state.accountId)
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}/?api_key=${this.state.key}`
     await fetch(URL)
     .then(res =>res.json())
     .then(data =>{
-      this.setState({
+      console.log(data.matches.slice(0,9), "PEGANDO PARTIDAS DE:", this.state.summoner, this.state.accountId)
+      this.setState({ 
         matches: data.matches.slice(0,9)
       })
     })
 
   }
   
+  getMatchHist = async (gameId) =>{
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${this.state.key}`
+    await fetch(URL)
+    .then(res => res.json())
+    .then(data =>{
+      this.setState({
+        match: data
+      })
+        })
+  }
   getMasteries = async  ()=> {
+    
     let  a = await this.getId()
-    console.log("AAAAAAAAAAAAAA", a)
-    console.log("print no MASTERIES ESSE 'O RETURN DO GET ID", a)
+    console.log(this.state.accountId, "AAAAAAAAAANTES DO SET")
     this.setState({
       id: a[0],
       profileIconId: a[1],
       accountId: a[2]
       
     })
-
+    console.log(this.state.accountId, 'DPSSSSSSSSSSSSSS DO SET')
     await this.getMatchesPlayed()
+    this.setState({matchesInfo:[]})
+    this.state.matches.map(async match=>{
+      //lista.push(match.gameId)
+      await this.getMatchHist(match.gameId)
+      this.state.matchesInfo.push(this.state.match)
+    })
+    
+
+    console.log("Atualizei o matchesInfo")
+    //this.setState({matchesInfo:lista})
+    
+
+
     await this.isPlaying()
     //https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/1HcKHDjWIyH9DL_WIRs0jpoeszZk2XGkdSP3YNnLY728-A?api_key=RGAPI-79c9aba9-baf0-4611-a9ca-ea4b57b532ed
-    URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
-    console.log(URL)
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
     fetch(URL)
     .then(res => res.json())
     .then((data) => {
@@ -125,8 +146,7 @@ class App extends Component {
 
   getRankedStats = async () =>{
     await this.getMasteries()
-    URL = `https://${this.state.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.id}/?api_key=${this.state.key}`
-    console.log(URL)
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/league/v4/entries/by-summoner/${this.state.id}/?api_key=${this.state.key}`
     fetch(URL)  
     .then(res => res.json())
     .then(data =>{
@@ -139,12 +159,10 @@ class App extends Component {
 
   componentDidMount = () =>{
     
-    URL = `https://${this.state.server}.api.riotgames.com/lol/status/v3/shard-data/?api_key=${this.state.key}`
-    console.log(URL)
+    let URL = `https://${this.state.server}.api.riotgames.com/lol/status/v3/shard-data/?api_key=${this.state.key}`
     fetch(URL)  
     .then(res => res.json())
     .then(data =>{
-      console.log(data)
       this.setState({
         status : data.services[0].status
       })
@@ -162,8 +180,7 @@ class App extends Component {
       this.setState({server_status: true})
     }
   }
-
-
+  
 
   render () {
   
@@ -215,7 +232,7 @@ class App extends Component {
 
           
           {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
-          {this.state.submitted  ? <Matches matches={this.state.matches} champions={champion}/> : null}
+          {this.state.submitted  ? <Matches   info={this.state.matchesInfo} id={this.state.id} champions={champion}/> : null}
           <Dados dados={this.state.dados} champions={champion} />  
           </div>
           </div>

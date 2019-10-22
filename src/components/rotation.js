@@ -12,7 +12,6 @@ function getName(id, array){
 
 
 const Rotation = (props =>{
-    console.log(props, "PROSP_SPSPSPSPSP")
     return (
         <div className="rotation">
                 <center>Free Week</center> 
