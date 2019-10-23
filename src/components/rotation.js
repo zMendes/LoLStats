@@ -12,9 +12,10 @@ function getName(id, array){
 
 
 const Rotation = (props =>{
+  if (props.rotation != undefined){
     return (
+      <div>
         <div className="rotation">
-                <center>Free Week</center> 
             {props.rotation.map(champion =>(
                 <div className="block">
                      <img  src={`dragontail-9.20.1/9.20.1/img/champion//${getName(champion, props.champions)}.png`} style={{width: 40, height: 40}}/>
@@ -22,7 +23,8 @@ const Rotation = (props =>{
                 
     ))}
         </div>
-    )
+        </div>
+    )}else {return("Algo deu errado! Username invalido")}
 })
 
 export default Rotation

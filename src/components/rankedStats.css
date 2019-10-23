@@ -1,14 +1,17 @@
 .stats{
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding-top: 1rem;
-    width: 12rem;
+    margin-left: 1rem;
+    width: 20rem;
     background-color: aliceblue;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
     border-radius: 0.5rem;
     height: 15rem;
     
 }
-
+.text2{
+    margin-left: 1rem;
+}
 .icon{
 
     text-align: center;

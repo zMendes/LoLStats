@@ -6,3 +6,28 @@
 .name{
     margin-left: 0.6rem;
 }
+
+
+.grid-itemMastery{
+    background-color: lightblue ;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    
+    width: 13rem;
+    height: 8rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
+    border-radius: 0.5rem;
+  
+}
+.grid-mastery{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #F9F9F9;
+    width: 70rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
+    border-radius: 0.5rem;
+  
+  }
+  

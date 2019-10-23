@@ -10,10 +10,12 @@ function getName(id, array){
     }
   }
 const Dados = (props => {
+  if (props!= undefined){
   return (
-    <div className = "grid">
+    <div>
+    <div className = "grid-mastery">
       {props.dados.map((dado) => (
-            <div className="grid-item">
+            <div className="grid-itemMastery">
               <img className="champ-icons" src={`dragontail-9.20.1/9.20.1/img/champion//${getName(dado.championId, props.champions)}.png`} style={{width: 40, height: 40}}/>
             <br></br>
             <div className="name">
@@ -34,6 +36,8 @@ const Dados = (props => {
             </div>
       ))}
     </div>
-  )
+    </div>
+  )}
+  else{return ("Algo deu errado! Username invalido")}
 })
 export default Dados

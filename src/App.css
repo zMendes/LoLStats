@@ -33,30 +33,72 @@ select {
   margin-left: -5rem;
 }
 
-.enter{
-  background-color: lightblue;
-  height: 2.6rem;
-  margin-left: 1rem;
-  border:2px solid blue;
-  border-radius: 0.2rem;
+
+input[type = submit]:hover{background-color: #7e7e7e
+
 }
+
+.enter{
+  margin-left: 0.9rem;
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 17px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: lightblue;
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px rgb(139, 139, 139);
+}
+
 
 .data{
   background-color: #74EBFC;
 }
 
 .grid{
-  display: grid;
-  grid-template-columns: auto auto auto auto auto  ;
-
+  display: flex;
+    align-items: baseline;
+    flex-flow: wrap;
 }
 
 .grid-item{
+
   background-color: #F9F9F9 ;
   margin-top: 2rem;
   margin-right: 2rem;
-  width: 15rem;
+  width: 13rem;
+  height: 8rem;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.8);
   border-radius: 0.5rem;
 
+}
+
+.titles{
+  display: flex;  
+}
+
+h3{
+  display: inline-block;
+    vertical-align:top;
+}
+
+.summoner{
+  margin-left: 4.34rem;
+}
+
+.hist{
+  margin-left: 5.5rem;
+}
+
+.mastery{
+  margin-left: 29rem;
+}
+
+.free{
+  width: 10rem;
+  margin-left: 25rem;
 }

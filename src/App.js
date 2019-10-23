@@ -73,7 +73,7 @@ class App extends Component {
         gameMode: data.gameType
       })
 
-    })
+    }).catch(console.log)
 
     if (this.state.gameMode === "MATCHED_GAME"){
       this.setState({isPlaying : true})
@@ -82,28 +82,29 @@ class App extends Component {
   }
 
   getMatchesPlayed = async ()=>{
-    console.log("pegando matches de:", this.state.accountId)
     let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}/?api_key=${this.state.key}`
+    console.log(URL)
     await fetch(URL)
     .then(res =>res.json())
     .then(data =>{
-      console.log(data.matches.slice(0,9), "PEGANDO PARTIDAS DE:", this.state.summoner, this.state.accountId)
+      console.log("DATAAAAAAAAAAAAAAAAAAAAAA", data)
       this.setState({ 
         matches: data.matches.slice(0,9)
       })
-    })
+    }).catch(console.log)
 
   }
   
   getMatchHist = async (gameId) =>{
     let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${this.state.key}`
+    console.log(URL)
     await fetch(URL)
     .then(res => res.json())
     .then(data =>{
       this.setState({
         match: data
       })
-        })
+        }).catch(console.log)
   }
   getMasteries = async  ()=> {
     
@@ -133,6 +134,7 @@ class App extends Component {
     await this.isPlaying()
     //https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/1HcKHDjWIyH9DL_WIRs0jpoeszZk2XGkdSP3YNnLY728-A?api_key=RGAPI-79c9aba9-baf0-4611-a9ca-ea4b57b532ed
     let URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
+    console.log(URL)
     fetch(URL)
     .then(res => res.json())
     .then((data) => {
@@ -154,7 +156,7 @@ class App extends Component {
         ranked_stats : data[0],
         submitted : true 
       })
-    })
+    }).catch(console.log)
   } 
 
   componentDidMount = () =>{
@@ -166,13 +168,13 @@ class App extends Component {
       this.setState({
         status : data.services[0].status
       })
-    })
+    }).catch(console.log)
     URL = `https://${this.state.server}.api.riotgames.com/lol/platform/v3/champion-rotations/?api_key=${this.state.key}`
     fetch(URL)
     .then(res => res.json())
     .then(data =>{
       this.setState({rotation: data.freeChampionIds})
-    })
+    }).catch(console.log)
 
 
     
@@ -194,12 +196,11 @@ class App extends Component {
           </div>
           Server:{this.state.status ? <img src="online.png" style={{width: 12, height: 15}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
 
-          <Rotation rotation={this.state.rotation} champions={champion}/>
 
 
           <div className="input">
           <form onSubmit={this.handleSubmit}>
-            <p><input type="text" name="summoner"  value={this.state.summoner} onChange={this.handleChange}/>
+            <p><input type="text" placeholder="Insira nome de invocador" name="summoner"  value={this.state.summoner} onChange={this.handleChange}/>
             <select name="server" onChange={this.handleChange  }>
             <option  selected  value="br1">BR</option>
             <option  value="euw1">EUW</option>
@@ -225,15 +226,30 @@ class App extends Component {
           
           </form>
           </div>
+          
+        
+          <div className="titles">   
+          
+          
+        {this.state.submitted ? <h3 className="summoner">Summoner</h3> : null}
+        {this.state.submitted ?<h3 className="hist">History</h3> : null}
+        {this.state.submitted ?<h3 className="mastery">Mastery</h3> : null}
+        {this.state.submitted ?<h4 className="free">Free Week</h4>  : null}
+          </div>
           <div className="data">
           
           {this.state.isPlaying ? <p>Em jogo</p> : null}
+          
+          
+
           <div className="grid">
 
           
           {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
           {this.state.submitted  ? <Matches   info={this.state.matchesInfo} id={this.state.id} champions={champion}/> : null}
-          <Dados dados={this.state.dados} champions={champion} />  
+          
+          {this.state.submitted ? <Dados dados={this.state.dados} champions={champion} />: null}  
+          {this.state.submitted ? <Rotation rotation={this.state.rotation} champions={champion}/>: null}
           </div>
           </div>
           <h1></h1>
