@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/LoLStats/static/css/main.88ff4f15.chunk.css",
+    "main.js": "/LoLStats/static/js/main.18f6f12e.chunk.js",
+    "main.js.map": "/LoLStats/static/js/main.18f6f12e.chunk.js.map",
+    "runtime-main.js": "/LoLStats/static/js/runtime-main.3b5182ab.js",
+    "runtime-main.js.map": "/LoLStats/static/js/runtime-main.3b5182ab.js.map",
+    "static/js/2.711e3c42.chunk.js": "/LoLStats/static/js/2.711e3c42.chunk.js",
+    "static/js/2.711e3c42.chunk.js.map": "/LoLStats/static/js/2.711e3c42.chunk.js.map",
+    "index.html": "/LoLStats/index.html",
+    "precache-manifest.5ffa6649a8cbd6065e5e73c0af8856b1.js": "/LoLStats/precache-manifest.5ffa6649a8cbd6065e5e73c0af8856b1.js",
+    "service-worker.js": "/LoLStats/service-worker.js",
+    "static/css/main.88ff4f15.chunk.css.map": "/LoLStats/static/css/main.88ff4f15.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3b5182ab.js",
+    "static/js/2.711e3c42.chunk.js",
+    "static/css/main.88ff4f15.chunk.css",
+    "static/js/main.18f6f12e.chunk.js"
+  ]
+}
