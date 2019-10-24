@@ -190,7 +190,7 @@ class App extends Component {
           <div style={{color: this.state.dark ? "white": "black"}}>
           Server:{this.state.status ? <img src="online.png" style={{width: 30, height: 30}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
           </div>
-          <img className="dark" src={this.state.dark ?"sun.png": "dark.png"} onClick={this.setDark} style={{width: 25, height: 25}}/>
+          <img className="dark" src={this.state.dark ?"sun.png": "dark.png"} onClick={this.setDark} style={{width: 25, height: 25, marginTop: "-2rem", marginRight: "1rem"}}/>
 
 
           <div className="input">
