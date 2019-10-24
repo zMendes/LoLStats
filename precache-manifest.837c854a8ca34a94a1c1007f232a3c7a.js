@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c79fa9a061fee1761c669dcc616e1b81",
+    "revision": "71e7facf13a5e13c7181a140bd37e866",
     "url": "/LoLStats/index.html"
   },
   {
-    "revision": "f3fb9aab3cce435d23d2",
-    "url": "/LoLStats/static/css/main.88ff4f15.chunk.css"
+    "revision": "116ba96c3bab90fdb166",
+    "url": "/LoLStats/static/css/main.41e7282d.chunk.css"
   },
   {
     "revision": "c1880d20d65a6968482b",
     "url": "/LoLStats/static/js/2.711e3c42.chunk.js"
   },
   {
-    "revision": "f3fb9aab3cce435d23d2",
-    "url": "/LoLStats/static/js/main.18f6f12e.chunk.js"
+    "revision": "116ba96c3bab90fdb166",
+    "url": "/LoLStats/static/js/main.5498b1c3.chunk.js"
   },
   {
     "revision": "e2c5bdf0f27e15c23179",
