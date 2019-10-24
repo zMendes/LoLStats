@@ -27,12 +27,10 @@ function getPartId(id, data){
 
 const Matches = (props =>{
   
-  console.log(props.info[0])  
-  //console.log("Return do getPartId", getPartId(props.id, props.info))
   if (getPartId(props.id, props.info[0])  != undefined && props.info[0].participantIdentities!= undefined){
   return (
   <div>
-        <div className = "grid-matches">
+        <div className = "grid-matches" style={{backgroundColor: props.dark ? "#121212" : "white"}}>
             {props.info.map(match=>(
               
               <div className="match" style={{'background-color' : match.participants[getPartId(props.id, match)-1].stats.win ? 'lightgreen':'lightcoral' }}>

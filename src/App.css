@@ -31,7 +31,7 @@ input[type = text]{
 }
 
 select {
-  margin-left: -5rem;
+  margin-left: -5.8rem;
 }
 
 
@@ -57,7 +57,7 @@ input[type = submit]:hover{background-color: #7e7e7e
 
 
 .data{
-  background-color: #74EBFC;
+  background-color: rgb(129, 116, 252);
 }
 
 .grid{
@@ -103,3 +103,8 @@ h3{
   width: 10rem;
   margin-left: 22rem;
 }
+
+.dark{
+  float: right;
+}
+

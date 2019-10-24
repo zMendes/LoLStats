@@ -29,7 +29,8 @@ class App extends Component {
     gameMode: "",
     isPlaying: false,
     matchesInfo: [],
-    match: []
+    match: [],
+    dark: false
       }
     }
 
@@ -52,7 +53,10 @@ class App extends Component {
     this.getRankedStats()
   }
       
+  setDark = ()=>{
+    this.setState({dark: !this.state.dark})
 
+  }
   async getId(){
 
     
@@ -83,11 +87,9 @@ class App extends Component {
 
   getMatchesPlayed = async ()=>{
     let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matchlists/by-account/${this.state.accountId}/?api_key=${this.state.key}`
-    console.log(URL)
     await fetch(URL)
     .then(res =>res.json())
     .then(data =>{
-      console.log("DATAAAAAAAAAAAAAAAAAAAAAA", data)
       this.setState({ 
         matches: data.matches.slice(0,9)
       })
@@ -97,7 +99,6 @@ class App extends Component {
   
   getMatchHist = async (gameId) =>{
     let URL = `https://${this.state.server}.api.riotgames.com/lol/match/v4/matches/${gameId}?api_key=${this.state.key}`
-    console.log(URL)
     await fetch(URL)
     .then(res => res.json())
     .then(data =>{
@@ -109,14 +110,12 @@ class App extends Component {
   getMasteries = async  ()=> {
     
     let  a = await this.getId()
-    console.log(this.state.accountId, "AAAAAAAAAANTES DO SET")
     this.setState({
       id: a[0],
       profileIconId: a[1],
       accountId: a[2]
       
     })
-    console.log(this.state.accountId, 'DPSSSSSSSSSSSSSS DO SET')
     await this.getMatchesPlayed()
     this.setState({matchesInfo:[]})
     this.state.matches.map(async match=>{
@@ -126,15 +125,11 @@ class App extends Component {
     })
     
 
-    console.log("Atualizei o matchesInfo")
-    //this.setState({matchesInfo:lista})
     
 
 
     await this.isPlaying()
-    //https://br1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/1HcKHDjWIyH9DL_WIRs0jpoeszZk2XGkdSP3YNnLY728-A?api_key=RGAPI-79c9aba9-baf0-4611-a9ca-ea4b57b532ed
     let URL = `https://${this.state.server}.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${this.state.id}?api_key=${this.state.key}`
-    console.log(URL)
     fetch(URL)
     .then(res => res.json())
     .then((data) => {
@@ -186,16 +181,16 @@ class App extends Component {
 
   render () {
   
-  
 
       return (
-        <div>
-          <div>
+      <div style={{backgroundColor: this.state.dark ? "rgb(20, 8, 133)": "white"}}>
             <div className="header">
           <h1>LoL Stats</h1>
           </div>
-          Server:{this.state.status ? <img src="online.png" style={{width: 12, height: 15}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
-
+          <div style={{color: this.state.dark ? "white": "black"}}>
+          Server:{this.state.status ? <img src="online.png" style={{width: 30, height: 30}}/>: <img src="offline.png" style={{width: 15, height: 15}}/>}
+          </div>
+          <img className="dark" src={this.state.dark ?"sun.png": "dark.png"} onClick={this.setDark} style={{width: 25, height: 25}}/>
 
 
           <div className="input">
@@ -231,10 +226,10 @@ class App extends Component {
           <div className="titles">   
           
           
-        {this.state.submitted ? <h3 className="summoner">Summoner</h3> : null}
-        {this.state.submitted ?<h3 className="hist">History</h3> : null}
-        {this.state.submitted ?<h3 className="mastery">Mastery</h3> : null}
-        {this.state.submitted ?<h4 className="free">Free Week</h4>  : null}
+        {this.state.submitted ? <h3 className="summoner" style={{color: this.state.dark ? "white" : "black"}}>Summoner</h3> : null}
+        {this.state.submitted ?<h3 className="hist" style={{color: this.state.dark ? "white" : "black"}}>History</h3> : null}
+        {this.state.submitted ?<h3 className="mastery" style={{color: this.state.dark ? "white" : "black"}}>Mastery</h3> : null}
+        {this.state.submitted ?<h4 className="free" style={{color: this.state.dark ? "white" : "black"}}>Free Week</h4>  : null}
           </div>
           <div className="data">
           
@@ -242,19 +237,17 @@ class App extends Component {
           
           
 
-          <div className="grid">
-
+          <div className="grid" style={{backgroundColor: this.state.dark ? "rgb(144, 26, 148)": "#74EBFC"}}> 
           
-          {this.state.submitted ? <RankedStats dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
-          {this.state.submitted  ? <Matches   info={this.state.matchesInfo} id={this.state.id} champions={champion}/> : null}
+          {this.state.submitted ? <RankedStats dark={this.state.dark} dados={this.state.ranked_stats} summoner={this.state.summoner} profileIconId={this.state.profileIconId} /> : null}
+          {this.state.submitted  ? <Matches   dark={this.state.dark} info={this.state.matchesInfo} id={this.state.id} champions={champion}/> : null}
           
-          {this.state.submitted ? <Dados dados={this.state.dados} champions={champion} />: null}  
-          {this.state.submitted ? <Rotation rotation={this.state.rotation} champions={champion}/>: null}
+          {this.state.submitted ? <Dados dark={this.state.dark} dados={this.state.dados} champions={champion} />: null}  
+          {this.state.submitted ? <Rotation dark={this.state.dark} rotation={this.state.rotation} champions={champion}/>: null}
           </div>
           </div>
           <h1></h1>
         
-        </div>
         </div>
       )}
     }

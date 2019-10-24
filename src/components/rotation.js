@@ -15,7 +15,7 @@ const Rotation = (props =>{
   if (props.rotation != undefined){
     return (
       <div>
-        <div className="rotation">
+        <div className="rotation" style={{backgroundColor: props.dark ? "#121212" : "white"}}>
             {props.rotation.map(champion =>(
                 <div className="block">
                      <img  src={`dragontail-9.20.1/9.20.1/img/champion//${getName(champion, props.champions)}.png`} style={{width: 40, height: 40}}/>
