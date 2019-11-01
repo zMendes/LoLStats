@@ -16,7 +16,7 @@ const Dados = (props => {
     <div className = "grid-mastery" style={{backgroundColor: props.dark ? "#121212" : "white" }}>
       {props.dados.map((dado) => (
             <div className="grid-itemMastery" style={{backgroundColor: props.dark ? "darkblue": "lightblue", color: props.dark ? "white": "black"}}>
-              <img className="champ-icons" src={`dragontail-9.20.1/9.20.1/img/champion//${getName(dado.championId, props.champions)}.png`} style={{width: 40, height: 40}}/>
+              <img className="champ-icons" src={`dragontail-9.3.1/9.3.1/img/champion//${getName(dado.championId, props.champions)}.png`} style={{width: 40, height: 40}}/>
             <br></br>
             <div className="name">
             {`${getName(dado.championId, props.champions)}`}

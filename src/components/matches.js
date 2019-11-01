@@ -34,7 +34,7 @@ const Matches = (props =>{
             {props.info.map(match=>(
               
               <div className="match" style={{'background-color' : match.participants[getPartId(props.id, match)-1].stats.win ? 'lightgreen':'lightcoral' }}>
-                <img src={`dragontail-9.20.1/9.20.1/img/champion//${getName(match.participants[getPartId(props.id, match)-1].championId, props.champions)}.png`} style={{width: 40, height: 40}}/> 
+                <img src={`dragontail-9.3.1/9.3.1/img/champion//${getName(match.participants[getPartId(props.id, match)-1].championId, props.champions)}.png`} style={{width: 40, height: 40}}/> 
                 <p>{getName(match.participants[getPartId(props.id, match)-1].championId, props.champions)}</p>
                 <div className="text">
                 {match.participants[getPartId(props.id, match)-1].stats.kills}/{match.participants[getPartId(props.id, match)-1].stats.deaths}/{match.participants[getPartId(props.id, match)-1].stats.assists} <br/>

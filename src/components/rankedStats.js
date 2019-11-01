@@ -9,7 +9,7 @@ const RankedStats = (props =>{
         <div>
     <div className= "stats" style={{backgroundColor: props.dark ? "#121212" : "white", color:props.dark ?  "white":"black"}}>
         
-        <center><img className="icon"src={`dragontail-9.20.1/9.20.1/img/profileicon/${props.profileIconId}.png`} style={{width: 80, height: 80}}/></center>
+        <center><img className="icon"src={`dragontail-9.3.1/9.3.1/img/profileicon/${props.profileIconId}.png`} style={{width: 80, height: 80}}/></center>
         <center>{`  ${props.summoner}`}</center>
         <div className="text2">
         <img src={`ranked-emblems/Emblem_${props.dados.tier}.png`}  style={{width: 45, height: 45}}/>{`${props.dados.tier} ${props.dados.rank}`} 
