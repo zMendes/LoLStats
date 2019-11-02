@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/LoLStats/static/css/main.41e7282d.chunk.css",
-    "main.js": "/LoLStats/static/js/main.0ff98c9e.chunk.js",
-    "main.js.map": "/LoLStats/static/js/main.0ff98c9e.chunk.js.map",
+    "main.js": "/LoLStats/static/js/main.6b066d61.chunk.js",
+    "main.js.map": "/LoLStats/static/js/main.6b066d61.chunk.js.map",
     "runtime-main.js": "/LoLStats/static/js/runtime-main.3b5182ab.js",
     "runtime-main.js.map": "/LoLStats/static/js/runtime-main.3b5182ab.js.map",
     "static/js/2.711e3c42.chunk.js": "/LoLStats/static/js/2.711e3c42.chunk.js",
     "static/js/2.711e3c42.chunk.js.map": "/LoLStats/static/js/2.711e3c42.chunk.js.map",
     "index.html": "/LoLStats/index.html",
-    "precache-manifest.348f38ed64c6d300a45d006851808ed1.js": "/LoLStats/precache-manifest.348f38ed64c6d300a45d006851808ed1.js",
+    "precache-manifest.68afd09507272e40d920485b69315338.js": "/LoLStats/precache-manifest.68afd09507272e40d920485b69315338.js",
     "service-worker.js": "/LoLStats/service-worker.js",
     "static/css/main.41e7282d.chunk.css.map": "/LoLStats/static/css/main.41e7282d.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.3b5182ab.js",
     "static/js/2.711e3c42.chunk.js",
     "static/css/main.41e7282d.chunk.css",
-    "static/js/main.0ff98c9e.chunk.js"
+    "static/js/main.6b066d61.chunk.js"
   ]
 }
