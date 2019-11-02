@@ -21,7 +21,7 @@ class App extends Component {
     ranked_stats: [],
     server: "br1",
     profileIconId: 0,
-    key : 'RGAPI-eead7efb-9999-4a3e-92b2-1433ea10724b',
+    key : 'RGAPI-c1bb0a16-667f-4cff-9382-8b6eb85a7e53',
     status: "",
     server_status: false,
     rotation : [],
